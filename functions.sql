@@ -219,7 +219,7 @@ END;
 $$;
 
 
-/*function and trigger*/
+/*function and trigger sumas contidad existente de los productos*/
 
 CREATE FUNCTION sumar_cantexistente()
 RETURNS TRIGGER 
