@@ -24,3 +24,8 @@ SELECT table_name
 FROM information_schema.tables
 WHERE table_schema NOT IN ('pg_catalog', 'information_schema')
 AND table_type = 'BASE TABLE';
+
+/* ver estructura de una tabla */
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'nombre_de_la_tabla';

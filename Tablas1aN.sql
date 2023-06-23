@@ -13,7 +13,10 @@ CREATE TABLE detalles_product (
   cantidad_departamentos INT,
   estatus VARCHAR(100),
   categoria_id INT,
+  marca_id INT,
+  caracteristicas TEXT[]
   FOREIGN KEY (categoria_id) REFERENCES tipo (id_tipo)
+  FOREIGN KEY (marca_id) REFERENCES marcas (id_marca)
 );
 
 
