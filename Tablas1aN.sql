@@ -54,9 +54,9 @@ CREATE TABLE usuarios (
 CREATE TABLE empleados (
   id_empleado INT PRIMARY KEY,
   tipo_empleado VARCHAR(100),
-  usuario_id INT,
   departamento_id INT,
-  FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario),
+  puesto VARCHAR (255),
+  salarios INT,
   FOREIGN KEY (departamento_id) REFERENCES departamentos(id_departamento)
 );
 
@@ -135,4 +135,27 @@ CREATE TABLE carrito_productos(
 );
 
 
+-- Tabla ventas
+CREATE TABLE ventas (
+  id_venta INT,
+  cliente_id INT,
+  carrito_id INT,
+  fecha_venta DATE,
+  monto_total DECIMAL (10,2),
+  estatus VARCHAR (255),
+  fecha_envio DATE,
+  FOREIGN KEY (cliente_id) REFERENCES clientes (id_cliente)
+  FOREIGN KEY (carrito_id) REFERENCES carrito(id_carrito)
+);
 
+-- Tabla Ventas Productos
+CREATE TABLE ventas_prod (
+  id_ventas_prod INT,
+  product_id INT,
+  cantidad_vendida INT,
+  precio DECIMAL (10,2),
+  subtotal DECIMAL (10,2),
+  venta_id INT,
+  FOREIGN KEY (product_id) REFERENCES product_bienes_inmuebles (id_product)
+  FOREIGN KEY (venta_id) REFERENCES ventas (id_venta)
+);

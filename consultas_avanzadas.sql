@@ -15,7 +15,7 @@ GROUP BY depa.id_departamento;
 
 /*1. mostrar
 los datos de todos los clientes que la fecha de envió es la fecha más reciente.
-obtenerlo de la tabla ventas, *
+obtenerlo de la tabla ventas, */
 SELECT c.id_cliente, c.personal_identification
 FROM clientes AS c
 WHERE c.id_cliente IN (
@@ -25,6 +25,11 @@ WHERE c.id_cliente IN (
     INNER JOIN ventas AS v ON car.cliente_id = v.cliente_id
     WHERE v.fecha_envio = (SELECT MAX(fecha_envio) FROM ventas)
 );
+
+SELECT c.*
+FROM clientes c
+JOIN ventas v ON c.id_cliente = v.cliente_id
+WHERE v.fecha_envio = (SELECT MAX(fecha_envio) FROM ventas)
 
 /*1.     
 La empresa desea saber cuánto tendrá que pagar
