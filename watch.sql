@@ -12,6 +12,7 @@ FROM information_schema.routines
 WHERE specific_schema NOT IN ('pg_catalog', 'information_schema')
 ORDER BY routine_name;
 
+drop funtion (nombre de la funcion ())
 
 /* ver tiggers */ 
 SELECT trigger_name, event_object_table, action_statement
@@ -29,3 +30,15 @@ AND table_type = 'BASE TABLE';
 SELECT column_name, data_type
 FROM information_schema.columns
 WHERE table_name = 'nombre_de_la_tabla';
+
+/* Ver los procedimientos que tengo creados*/ 
+SELECT proname, nspname
+FROM pg_catalog.pg_proc p
+JOIN pg_catalog.pg_namespace n ON p.pronamespace = n.oid
+WHERE n.nspname = 'public'; -- Reemplaza 'public' con el esquema donde creaste tus procedimientos, si es diferente
+
+DROP PROCEDURE IF EXISTS (nombre del procedimiento ());
+
+
+
+

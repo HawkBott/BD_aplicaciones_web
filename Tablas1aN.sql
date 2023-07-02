@@ -19,7 +19,7 @@ CREATE TABLE detalles_product (
   FOREIGN KEY (marca_id) REFERENCES marcas (id_marca)
 );
 
-
+/moficada maybe
 -- Tabla Productos - bienes inmuebles
 CREATE TABLE product_bienes_inmuebles (
   id_product INT PRIMARY KEY,
@@ -137,25 +137,25 @@ CREATE TABLE carrito_productos(
 
 -- Tabla ventas
 CREATE TABLE ventas (
-  id_venta INT,
+  id_venta SERIAL PRIMARY KEY,
   cliente_id INT,
   carrito_id INT,
   fecha_venta DATE,
   monto_total DECIMAL (10,2),
   estatus VARCHAR (255),
   fecha_envio DATE,
-  FOREIGN KEY (cliente_id) REFERENCES clientes (id_cliente)
-  FOREIGN KEY (carrito_id) REFERENCES carrito(id_carrito)
+  FOREIGN KEY (cliente_id) REFERENCES clientes (id_cliente) ON DELETE CASCADE,
+  FOREIGN KEY (carrito_id) REFERENCES carrito(id_carrito) ON DELETE CASCADE
 );
 
 -- Tabla Ventas Productos
 CREATE TABLE ventas_prod (
-  id_ventas_prod INT,
+  id_ventas_prod SERIAL PRIMARY KEY,
   product_id INT,
   cantidad_vendida INT,
   precio DECIMAL (10,2),
   subtotal DECIMAL (10,2),
   venta_id INT,
-  FOREIGN KEY (product_id) REFERENCES product_bienes_inmuebles (id_product)
-  FOREIGN KEY (venta_id) REFERENCES ventas (id_venta)
+  FOREIGN KEY (product_id) REFERENCES product_bienes_inmuebles (id_product) ON DELETE CASCADE,
+  FOREIGN KEY (venta_id) REFERENCES ventas (id_venta) ON DELETE CASCADE
 );
