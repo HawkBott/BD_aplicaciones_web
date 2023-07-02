@@ -19,7 +19,7 @@ CREATE TABLE detalles_product (
   FOREIGN KEY (marca_id) REFERENCES marcas (id_marca)
 );
 
-/moficada maybe
+
 -- Tabla Productos - bienes inmuebles
 CREATE TABLE product_bienes_inmuebles (
   id_product INT PRIMARY KEY,

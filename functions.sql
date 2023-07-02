@@ -241,3 +241,20 @@ UPDATE product_bienes_inmuebles
 SET cantexistente = 200
 WHERE id_product = 2;
 
+--procedimiento con procedure verificar cantidad existente
+create function verificar_cantexistente(
+product_id int, cantidad_vendida int)
+returns int
+language plpgsql AS
+$$
+declare resp integer default 0;
+declare cant integer default 0;
+begin
+select cantexistente into cant from product_bienes_inmuebles
+where id_product=product_id;
+if (cant>= cantidad_vendida) then 
+resp:=1;
+end if;
+return (resp);
+end;
+$$
