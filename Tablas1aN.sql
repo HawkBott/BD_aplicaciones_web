@@ -1,9 +1,26 @@
 
 // TABLAS CON FK
 
+-- Tabla Productos - bienes inmuebles
+CREATE TABLE product_bienes_inmuebles (
+  id_product SERIAL PRIMARY KEY,
+  numero_predio INT,
+  precio_venta DECIMAL(10, 2),
+  superficie_terreno DECIMAL(10, 2),
+  superficie_construida DECIMAL(10, 2),
+  year_construction INT,
+  fecha_adquisicion DATE,
+  foto VARCHAR(255),
+  costo DECIMAL (10, 2),
+  cantexistente int,
+  detalles_product_id INT,
+  FOREIGN KEY (detalles_product_id) REFERENCES detalles_product(id_detalles_product) ON DELETE CASCADE
+);
+
+
 -- Tabla de Detalles del Product
 CREATE TABLE detalles_product (
-  id_detalles_product INT PRIMARY KEY,
+  id_detalles_product SERIAL PRIMARY KEY,
   total_habitaciones INT,
   niveles INT,
   num_recamaras INT,
@@ -15,31 +32,14 @@ CREATE TABLE detalles_product (
   categoria_id INT,
   marca_id INT,
   caracteristicas TEXT[]
-  FOREIGN KEY (categoria_id) REFERENCES tipo (id_tipo)
-  FOREIGN KEY (marca_id) REFERENCES marcas (id_marca)
-);
-
-
--- Tabla Productos - bienes inmuebles
-CREATE TABLE product_bienes_inmuebles (
-  id_product INT PRIMARY KEY,
-  numero_predio INT,
-  precio_venta DECIMAL(10, 2),
-  superficie_terreno DECIMAL(10, 2),
-  superficie_construida DECIMAL(10, 2),
-  year_construction INT,
-  fecha_adquisicion DATE,
-  foto VARCHAR(255),
-  costo DECIMAL (10, 2),
-  cantexistente int,
-  detalles_product_id INT,
-  FOREIGN KEY (detalles_product_id) REFERENCES detalles_product(id_detalles_product)
+  FOREIGN KEY (categoria_id) REFERENCES tipo (id_tipo) ON DELETE CASCADE,
+  FOREIGN KEY (marca_id) REFERENCES marcas (id_marca) ON DELETE CASCADE
 );
 
 
 -- Tabla de Usuarios
 CREATE TABLE usuarios (
-  id_usuario int primary key,
+  id_usuario SERIAL PRIMARY KEY,
   email VARCHAR(100),
   password VARCHAR(100),
   nombreUsuario VARCHAR(100),
@@ -47,39 +47,39 @@ CREATE TABLE usuarios (
   fechaRegistro DATE,
   firmaDigital VARCHAR(255),
   rol_id INT,
-  FOREIGN KEY (rol_id) REFERENCES roles(id_rol)
+  FOREIGN KEY (rol_id) REFERENCES roles(id_rol) ON DELETE CASCADE
 );
 
 -- Tabla de Empleados
 CREATE TABLE empleados (
-  id_empleado INT PRIMARY KEY,
+  id_empleado SERIAL PRIMARY KEY,
   tipo_empleado VARCHAR(100),
   departamento_id INT,
   puesto VARCHAR (255),
   salarios INT,
-  FOREIGN KEY (departamento_id) REFERENCES departamentos(id_departamento)
-);
+  FOREIGN KEY (departamento_id) REFERENCES departamentos(id_departamento) ON DELETE CASCADE
+); 
 
 
 -- Tabla de Carritos
 CREATE TABLE carrito (
-  id_carrito INT PRIMARY KEY,
+  id_carrito SERIAL PRIMARY KEY,
   fecha_pedido DATE,
   estatus VARCHAR(100),
   sub_total DECIMAL(10, 2),
   cliente_id INT,
-  FOREIGN KEY (cliente_id) REFERENCES clientes(id_cliente)
+  FOREIGN KEY (cliente_id) REFERENCES clientes(id_cliente) ON DELETE CASCADE
 );
 
 -- Tabla de Formas de Pago
 CREATE TABLE formas_pago (
-  id_forma_pago INT PRIMARY KEY,
+  id_forma_pago SERIAL PRIMARY KEY,
   num_autorizacion VARCHAR(100),
   total DECIMAL(10, 2),
   fechaPago DATE,
   tipoPago VARCHAR(100),
   carrito_id INT,
-  FOREIGN KEY (carrito_id) REFERENCES carrito(id_carrito)
+  FOREIGN KEY (carrito_id) REFERENCES carrito(id_carrito) ON DELETE CASCADE
 );
 
 create table if not exists state (
