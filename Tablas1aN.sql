@@ -3,7 +3,6 @@
 
 -- Tabla Productos - bienes inmuebles
 CREATE TABLE product_bienes_inmuebles (
-  id_product SERIAL PRIMARY KEY,
   numero_predio INT,
   precio_venta DECIMAL(10, 2),
   superficie_terreno DECIMAL(10, 2),
@@ -11,9 +10,10 @@ CREATE TABLE product_bienes_inmuebles (
   year_construction INT,
   fecha_adquisicion DATE,
   foto VARCHAR(255),
-  costo DECIMAL (10, 2),
-  cantexistente int,
   detalles_product_id INT,
+  costo DECIMAL (10, 2),
+  cantexistente INT,
+  id_product SERIAL PRIMARY KEY,
   FOREIGN KEY (detalles_product_id) REFERENCES detalles_product(id_detalles_product) ON DELETE CASCADE
 );
 
@@ -73,12 +73,11 @@ CREATE TABLE carrito (
 
 -- Tabla de Formas de Pago
 CREATE TABLE formas_pago (
-  id_forma_pago SERIAL PRIMARY KEY,
   num_autorizacion VARCHAR(100),
-  total DECIMAL(10, 2),
   fechaPago DATE,
   tipoPago VARCHAR(100),
   carrito_id INT,
+  id_forma_pago SERIAL PRIMARY KEY,
   FOREIGN KEY (carrito_id) REFERENCES carrito(id_carrito) ON DELETE CASCADE
 );
 
